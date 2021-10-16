@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BOBAXIXIXI</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+
+<body style="background-color: antiquewhite;">
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <br> <br>
+    <div class="container" style="background-color: white;">
+        <div class="card m-4 p-4">
+            <div class="card-body">
+                <div class="justify-content-center">
+                    <h2 style="text-align: center; color:brown;">Update Store Form</h2>
+                    <br>
+                    <form th:action="@{/store/update/} + ${store.idStore}" th:object="${store}" method="POST">
+                        <input type="hidden" th:field="*{kodeStore}"> <input type="hidden" th:field="*{idStore}" />
+                        <div class="row">
+                            <div class="col">
+                                Store Name : <br>
+                                <input required class="form-control" type="text" name="namaStore" th:value="*{namaStore}" />
+                            </div>
+                            <div class="col">
+                                Manager <br>
+                                <select name="manager" class="form-control">
+                                    <div th:each="manager, iterationStatus : ${listManager}">
+                                        <option th:value="${manager.idManager}" th:text="${manager.namaManager}"></option>
+                                    </div>
+                                </select>
+                            </div>
+                        </div>
+                        <br><br> Address : <br>
+                        <input required class="form-control" type="text" name="alamatStore" th:value="*{alamatStore}" />
+                        <br><br>
+                        <div class="row">
+                            <div class="col">
+                                Open Hour : <br>
+                                <input required class="form-control" type="time" name="jamBuka" th:value="*{jamBuka}" />
+                            </div>
+                            <div class="col">
+                                Close Hour : <br>
+                                <input required class="form-control" type="time" name="jamTutup" th:value="*{jamTutup}" />
+                            </div>
+                        </div>
+                        <br><br>
+                        <a class="btn btn-outline-warning" href="/store">Cancel</a>
+                        <button class="btn conten" style="background-color:antiquewhite;" type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

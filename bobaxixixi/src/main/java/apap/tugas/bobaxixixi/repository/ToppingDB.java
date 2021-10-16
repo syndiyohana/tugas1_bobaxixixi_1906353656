@@ -1,5 +1,12 @@
 package apap.tugas.bobaxixixi.repository;
 
-public class ToppingDB {
+import apap.tugas.bobaxixixi.model.ToppingModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
+@Repository
+public interface ToppingDB extends JpaRepository<ToppingModel, Long>{
+    Optional<ToppingModel> findByidTopping(Long idTopping);
 }

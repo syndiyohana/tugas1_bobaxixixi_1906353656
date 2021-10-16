@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -20,30 +19,25 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "manager")
+@Table(name = "topping")
 
-public class ManagerModel implements Serializable {
+public class ToppingModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idManager;
+    private Long idTopping;
 
     @NotNull
     @Size(max = 255)
     @Column(nullable = false)
-    private String namaManager;
+    private String namaTopping;
 
     @NotNull
     @Column(nullable = false)
-    private Integer jenisKelamin;
+    private Integer hargaTopping;
 
-    @NotNull
-    @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date tanggalLahir;
-
-//    //Relasi dengan Store
-    @OneToOne(mappedBy = "manager")
-    private StoreModel store;
+    //Relasi dengan BobaTeaModel
+    @OneToMany(mappedBy = "topping", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<BobaTeaModel> listBobaTea;
 }
 
